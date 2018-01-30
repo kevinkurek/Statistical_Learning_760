@@ -63,7 +63,7 @@ class knn_algo():
       cv_scores.append(scores.mean())
     print(cv_scores)
 
-    index, value = max(enumerate(cv_scores), key=operator.itemgetter(1))
+    index, value = max(enumerate(cv_scores), key=operator.itemgetter(1)) # index = # of optimal neighbors, value = mean max accuracy on that neighbor
     print('The maximum accuracy is: {}'.format(value))
     print('The optimal number of neighbors is: {}'.format(index+1))
     return 'It worked'
@@ -73,7 +73,6 @@ class knn_algo():
     self.knn.fit(self.X_train,self.y_train)
     self.y_pred = self.knn.predict(self.X_test)
     print(confusion_matrix(self.y_test, self.y_pred))
-    #print(classification_report(self.y_test,self.y_pred))
     return classification_report(self.y_test,self.y_pred)
 
 first = knn_algo([df_0,df_3],1)
