@@ -83,3 +83,44 @@ third.concat_dfs()
 third.features()
 print(third.linear_model())
 print(third.prediction())
+
+
+
+
+
+
+
+
+# Prostate cancer k-subset optimization for linear Regression
+
+#%%
+import pandas as pd
+from sklearn import linear_model
+
+df = pd.read_csv('/Users/kevin/Desktop/Stats 760/Homework2/prostate.txt',sep='\t') #tab delimited
+# print(df.head())
+df = df.drop(df.columns[0],axis=1) # First column was a duplicate index
+df.head()
+
+# Splitting into same training and test set used in the data
+training_df = df[df['train']=='T']
+test_df = df[df['train']=='F']
+training_df = training_df.drop('train', axis=1)
+test_df = test_df.drop('train', axis=1)
+assert len(df)==(len(training_df)+len(test_df)), 'Lengths dont match original data' # Didn't show, so they match
+
+#%%
+# Split training_df into X and y components
+X_train = training_df.iloc[:,:-1]
+y_train = training_df.iloc[:,-1]
+print(X_train)
+print(y_train)
+
+
+# STOPPED HERE
+# Design Single Linear Regression Algorithm
+# Design a loop through all the combinations of possible linear regeressions
+
+#%%
+regression = linear_model.LinearRegression()
+regression.fit(training_df,test_df)
