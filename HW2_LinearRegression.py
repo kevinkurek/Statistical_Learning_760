@@ -7,14 +7,12 @@
 #%%
 import numpy as np
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from sklearn.metrics import confusion_matrix
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
+
 import operator
 
 df_0 = pd.read_csv('/Users/kevin/Desktop/Stats 760/Homework1/train.0.txt',header=None)
@@ -91,36 +89,69 @@ print(third.prediction())
 
 
 
-# Prostate cancer k-subset optimization for linear Regression
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #%%
-import pandas as pd
-from sklearn import linear_model
-
-df = pd.read_csv('/Users/kevin/Desktop/Stats 760/Homework2/prostate.txt',sep='\t') #tab delimited
-# print(df.head())
-df = df.drop(df.columns[0],axis=1) # First column was a duplicate index
-df.head()
-
-# Splitting into same training and test set used in the data
-training_df = df[df['train']=='T']
-test_df = df[df['train']=='F']
-training_df = training_df.drop('train', axis=1)
-test_df = test_df.drop('train', axis=1)
-assert len(df)==(len(training_df)+len(test_df)), 'Lengths dont match original data' # Didn't show, so they match
-
-#%%
-# Split training_df into X and y components
-X_train = training_df.iloc[:,:-1]
-y_train = training_df.iloc[:,-1]
-print(X_train)
-print(y_train)
+# Attempt 3
+# from sklearn.datasets import load_boston
+import matplotlib.pyplot as plt
+from mlxtend.feature_selection import SequentialFeatureSelector as SFS
+from mlxtend.plotting import plot_sequential_feature_selection as plot_sfs
 
 
-# STOPPED HERE
-# Design Single Linear Regression Algorithm
-# Design a loop through all the combinations of possible linear regeressions
+# SFS allows you to do k-subset selection in a single line of code
+# the 8 tells it to loop through 8 features and return the negative mean squared error
+reg = linear_model.LinearRegression()
+sfs = SFS(reg,k_features=8,forward=True,floating=False,scoring='neg_mean_squared_error',cv=10)
+sfs = sfs.fit(X_train,y_train)
+
+fig = plot_sfs(sfs.get_metric_dict(), kind='std_err')
+plt.title('Sequential Forward Selection (w. StdErr)')
+plt.grid()
+plt.show()
+
+
+
+
+
 
 #%%
-regression = linear_model.LinearRegression()
-regression.fit(training_df,test_df)
+# def regressions(X_train_set,X_test_set):
+
+#   count = 0
+#   X_train_list = []
+#   X_test_list = []
+#   for value in X_train_set.iloc[:,count]:
+#       X_train_list.append(value)
+#       count += 1
+
+#   for value in X_test_set.iloc[:,count]:
+#       X_test_list.append(value)
+#   return np.array(X_train_list), np.array(X_test_list)
+
+# X_train_vector, X_test_vector = regressions(X_train,X_test)
+# X_train_vector = X_train_vector.reshape(X_train_vector.shape[0],1)
+# X_test_vector = X_test_vector.reshape(X_test_vector.shape[0],1)
+# print(X_train_vector.shape)
+# print(X_test_vector.shape)
+
+
+# reg = linear_model.LinearRegression()
+# reg.fit(X_train_vector,y_train)
+# y_pred = reg.predict(X_test_vector)
+# rss = ((y_pred - y_test)**2).sum()
+# print(rss)
