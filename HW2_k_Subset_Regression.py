@@ -5,6 +5,13 @@
 
 # Prostate cancer k-subset optimization for linear Regression
 
+#######
+# Note: Yes I'm well aware there should be a loop through the class
+#       establishing the combinations of k-subsets. I ran out of time
+#       before having to turn in the assignment.
+#######
+
+
 #%%
 import pandas as pd
 import numpy as np
@@ -41,8 +48,8 @@ y_train = np.array(training_df.iloc[:,-1])
 X_test = np.array(test_df.iloc[:,:-1])
 y_test = np.array(test_df.iloc[:,-1])
 
-# X_train_feature1 = X_train[:,0].reshape(-1,1)
-# X_test_feature1 = X_test[:,0].reshape(-1,1)
+X_train_feature1 = X_train[:,0].reshape(-1,1)
+X_test_feature1 = X_test[:,0].reshape(-1,1)
 # print(X_test_feature1)
 # print(y_train)
 X_train_original
@@ -50,6 +57,7 @@ X_test_original
 y_train_original
 y_test_original
 
+#%%
 # Create a class of above functions
 
 class k_subset_regression():
@@ -149,6 +157,8 @@ list_of_subset_df_test8 = k_subset_reg.subset_dataframes()
 
 def loop_regression(list_of_subset_df_train,y_train,list_of_subset_df_test,y_test):
 
+  rss_list = []
+
   for train,test in zip(list_of_subset_df_train,list_of_subset_df_test):
 
     reg = linear_model.LinearRegression()
@@ -157,16 +167,26 @@ def loop_regression(list_of_subset_df_train,y_train,list_of_subset_df_test,y_tes
     rss = ((y_pred - y_test)**2).sum() # Residual Sum of Squares
     r2_auto = reg.score(test,y_test)
 
-  return rss
+    rss_list.append(rss)
+
+  return np.mean(rss_list)
 
 rss_1 = loop_regression(list_of_subset_df_train1, y_train_original, list_of_subset_df_test1, y_test_original)
+print(rss_1)
 rss_2 = loop_regression(list_of_subset_df_train2, y_train_original, list_of_subset_df_test2, y_test_original)
+print(rss_2)
 rss_3 = loop_regression(list_of_subset_df_train3, y_train_original, list_of_subset_df_test3, y_test_original)
+print(rss_3)
 rss_4 = loop_regression(list_of_subset_df_train4, y_train_original, list_of_subset_df_test4, y_test_original)
+print(rss_4)
 rss_5 = loop_regression(list_of_subset_df_train5, y_train_original, list_of_subset_df_test5, y_test_original)
+print(rss_5)
 rss_6 = loop_regression(list_of_subset_df_train6, y_train_original, list_of_subset_df_test6, y_test_original)
+print(rss_6)
 rss_7 = loop_regression(list_of_subset_df_train7, y_train_original, list_of_subset_df_test7, y_test_original)
+print(rss_7)
 rss_8 = loop_regression(list_of_subset_df_train8, y_train_original, list_of_subset_df_test8, y_test_original)
+print(rss_8)
 
 list_rss = [rss_1,rss_2,rss_3,rss_4,rss_5,rss_6,rss_7,rss_8]
 
@@ -184,13 +204,11 @@ plt.show()
 
 
 
-
-
-
-
+############################
+# Manually designed single Linear Regression Algorithm to check
+############################
 
 #%%
-# Manually designed single Linear Regression Algorithm to check
 X = X_train_feature1
 y = y_train
 
@@ -247,77 +265,11 @@ print(r2_auto)
 
 
 
-# #%%
-# class k_subset_regression():
-
-#   def __init__(self,input_features_df,choose_k):
-#     self.input_features_df = input_features_df
-#     self.choose_k = choose_k
-
-#   def combin(self):
-#     """ Input: Takes a list of columns, L, and the number of columns, k, you choose for your subset
-#         returns: subset combinations of L choose k """
-#     combo = list(combinations(self.input_features_df,self.choose_k))
-
-#     self.newlist = []
-#     for i in combo:
-#       self.newlist.append(i)
-#     return self.newlist
-
-#   # combination_list = combin(X_train_original,2)
-
-#   def subset_dataframes(self):
-#     """ Input: train or test data you wish to create subsets of
-#         returns: a list of all the subsets of combinations you specified in combin() """
-
-#     list_of_subset_df = [] 
-#     for column in self.newlist:
-#       list_column = list(column)
-#       #print(list_column)
-#       subset_df = pd.DataFrame(self.input_features_df[list_column])
-#       list_of_subset_df.append(subset_df)
-#     return self.list_of_subset_df
-
-#   def iterate_list_of_subsets(list_of_subset_df_train,list_of_subset_df_test):
-
-
-# #%%
-# def iterate_list_of_subsets(X_train_original):
-
-#   list_of_all_combinations_train = []
-#   list_of_all_combinations_test = []
-
-#   for i in range(len(X_train_original)):
-#     k_subset_reg = k_subset_regression(X_train_original,i)
-#     k_subset_reg.combin()
-#     list_of_subset_df_train = k_subset_reg.subset_dataframes()
-#     list_of_all_combinations_train.append(list_of_subset_df_train)
-#     print(list_of_all_combinations_train)
-
-
-#   for j in range(len(X_train_original)):
-#     k_subset_reg = k_subset_regression(X_test_original,j)
-#     k_subset_reg.combin()
-#     list_of_subset_df_test = k_subset_reg.subset_dataframes()
-#     list_of_all_combinations_test.append(list_of_subset_df_test)
-  
-#   return list_of_all_combinations_train, list_of_all_combinations_test
-
-# iterate_list_of_subsets(X_train_original)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+###########################
+# Messing around with some cool packages I found
+# when trying to get through k-subset selection
+# for regression algorithms.
+###########################
 
 
 #%%
