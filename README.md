@@ -3,4 +3,6 @@
 ### Repo was created for projects/homework coming from Statistical Learning 760 at the University of Nevada, Reno.
 
 Items this repo contains:
-  1) HW1, k-Nearest Neighbors.
+  1) HW1, k-Nearest Neighbors for Subset Digit Recognition.
+  2) HW2 Part 1, Linear Regression for Subset Digit Recognition.
+  3) HW2 Part 2, k-subset feature selection with looped Linear Regression for Prostate Cancer Data.
