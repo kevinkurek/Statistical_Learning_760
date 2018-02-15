@@ -12,3 +12,4 @@ Items this repo contains:
   1) HW1, k-Nearest Neighbors for Subset Digit Recognition.
   2) HW2 Part 1, Linear Regression for Subset Digit Recognition.
   3) HW2 Part 2, k-subset feature selection with looped Linear Regression for Prostate Cancer Data.
+  4) HW3, Principal Component Analysis for Dimension Reduction into Gaussian Modeling for Digits.
