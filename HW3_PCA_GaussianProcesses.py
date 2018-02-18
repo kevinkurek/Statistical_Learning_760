@@ -7,7 +7,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.gaussian_process import GaussianProcessClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import scale
@@ -108,7 +108,8 @@ class gaussian_process():
     Gaussian = GaussianProcessClassifier()
     Gaussian.fit(self.X_train,self.y_train)
     self.ypred = Gaussian.predict(self.X_test)
-    print(classification_report(self.y_test,self.ypred))
+    #print(classification_report(self.y_test,self.ypred))
+    print(confusion_matrix(self.y_test,self.ypred))
     return 'Done'
 
 # Call Instance using digits dataframes in a list
