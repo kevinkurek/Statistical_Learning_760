@@ -13,3 +13,5 @@ Items this repo contains:
   2) HW2 Part 1, Linear Regression for Subset Digit Recognition.
   3) HW2 Part 2, k-subset feature selection with looped Linear Regression for Prostate Cancer Data.
   4) HW3, Principal Component Analysis for Dimension Reduction into Gaussian Modeling for Digits.
+  5) HW4 Part 1, Gaussian Mixture Models using 2 gaussians for Digits dataset.
+  6) HW4 Part 2, Logistic Regression using comparison digits like in HW1.
