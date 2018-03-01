@@ -406,7 +406,7 @@ def load_test_data(file_name):
     return test_data_buffer
 
 
-def run_test_data(test_data_set, gauss_classifier):
+def startTestData(test_data_set, gauss_classifier):
     # row indexed by the test label, column indexed by predicted class
     confusion_matrix = np.zeros((10, 10))
 
@@ -420,7 +420,7 @@ def run_test_data(test_data_set, gauss_classifier):
     return confusion_matrix
 
 
-def calc_performance_from_confusion(confusion_mat):
+def confusion_perform(confusion_mat):
     total_test_data = np.sum(confusion_mat)
 
     # calculate the accuracy and error rate (1 - accuracy)
@@ -435,23 +435,14 @@ def calc_performance_from_confusion(confusion_mat):
     return accuracy, error_rate, precisions
 
 
-def save_data_to_csv(data, file_name, csv_header, data_format):
-    np.savetxt(file_name,
-               data,
-               delimiter=",",
-               header=csv_header,
-               fmt=data_format)
-    return
-
-
 def run_default_classifier(test_data_set):
     classifier = gauss(0.1)
 
     for label, file in training_data_files.items():
         classifier.additional_class(label, file)
 
-    confusion = run_test_data(test_data_set, classifier)
-    accuracy, error, precisions = calc_performance_from_confusion(confusion)
+    confusion = startTestData(test_data_set, classifier)
+    accuracy, error, precisions = confusion_perform(confusion)
 
     csv_file_name = out_directory + "all_features_metrics.csv"
     csv_file_header = "Accuracy,Error"
@@ -464,48 +455,7 @@ def run_default_classifier(test_data_set):
                      csv_file_header,
                      '%.5f')
 
-    print("done!! \n", confusion)
-
-    return
-
-
-def visualize_pca_run(run_results):
-    plt.scatter(run_results[:, 0], run_results[:, 2], facecolors='none', linewidths=0.5, edgecolors='b', s=10)
-    plt.plot(run_results[:, 0], run_results[:, 2], 'r-', linewidth=0.5)
-
-    x1, x2, y1, y2 = plt.axis()
-    plt.axis((x1, x2, 0, 1))
-
-    plt.title("Classifier Error with Varying Dimensions")
-    plt.xlabel("Number of Dimensions")
-    plt.ylabel("Error Rate")
-
-    plt.show()
-
-    return
-
-
-def run_pca_classifier(test_data_set):
-    results = []
-    for num_components in range(5, 155, 5):
-        classifier = pca(0.1, num_components)
-
-        for label, file in training_data_files.items():
-            classifier.additional_class(label, file)
-
-        confusion = run_test_data(test_data_set, classifier)
-        accuracy, error, precisions = calc_performance_from_confusion(confusion)
-        results.append((num_components, accuracy, error))
-        print("num_component completed: ", num_components)
-
-    csv_file_name = out_directory + "pca_metrics.csv"
-    csv_file_header = "Number of Dimensions,Accuracy,Error"
-    save_data_to_csv(results,
-                     csv_file_name,
-                     csv_file_header,
-                     '%.5f')
-
-    visualize_pca_run(np.array(results))
+    print("It Worked. \n", confusion)
 
     return
 
@@ -517,7 +467,7 @@ def run_mixture_of_gaussian(test_data_set):
     for label, file in training_data_files.items():
         classifier.additional_class(label, file)
 
-    confusion = run_test_data(test_data_set, classifier)
+    confusion = startTestData(test_data_set, classifier)
 
     confusion_file_prefix = "/Users/kevin/Desktop/"
     output_file_name = confusion_file_prefix + "mgc_confusion_" + str(number_of_gaussians_distributions) + "_models.csv"
@@ -526,7 +476,7 @@ def run_mixture_of_gaussian(test_data_set):
                fmt='%i',
                delimiter=',')
 
-    print("done!! \n", confusion)
+    print("It Worked. \n", confusion)
 
     return
 
