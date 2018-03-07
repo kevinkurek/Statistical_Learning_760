@@ -15,3 +15,4 @@ Items this repo contains:
   4) HW3, Principal Component Analysis for Dimension Reduction into Gaussian Modeling for Digits.
   5) HW4 Part 1, Gaussian Mixture Models using 2 gaussians for Digits dataset.
   6) HW4 Part 2, Logistic Regression using comparison digits like in HW1.
+  7) HW5, Perceptron Learning Algorithm and Gradient Descent on simulated (linearly separable) data.
