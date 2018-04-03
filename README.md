@@ -16,3 +16,4 @@ Items this repo contains:
   5) HW4 Part 1, Gaussian Mixture Models using 2 gaussians for Digits dataset.
   6) HW4 Part 2, Logistic Regression using comparison digits like in HW1.
   7) HW5, Perceptron Learning Algorithm and Gradient Descent on simulated (linearly separable) data.
+  8) HW6, Principal Component Analysis into Neural Network from scratch. Additional Keras optimized model.
