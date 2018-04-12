@@ -17,3 +17,5 @@ Items this repo contains:
   6) HW4 Part 2, Logistic Regression using comparison digits like in HW1.
   7) HW5, Perceptron Learning Algorithm and Gradient Descent on simulated (linearly separable) data.
   8) HW6, Principal Component Analysis into Neural Network from scratch. Additional Keras optimized model.
+  9) HW7, Feed-Forward Neural Network for Phonemes.
+  10) HW8, AdaBoost for generated circular data.
