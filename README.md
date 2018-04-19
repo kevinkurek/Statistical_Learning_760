@@ -19,3 +19,4 @@ Items this repo contains:
   8) HW6, Principal Component Analysis into Neural Network from scratch. Additional Keras optimized model.
   9) HW7, Feed-Forward Neural Network for Phonemes.
   10) HW8, AdaBoost for generated circular data.
+  11) HW9, Support Vector Machine using SMO (sequential minimal optimization) algorithm.
