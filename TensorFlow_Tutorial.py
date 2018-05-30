@@ -1,11 +1,10 @@
 # TensorFlow
 
 # TensorFlow is a computation graph composed of a set of nodes. Each
-# node represents an opeation that may have zero or more input or output.
+# node represents an operation that may have zero or more input or output.
 # The values that flow through the edges of the computation graph are called
 # tensors (hence the name).
 
-#%%
 # Implement basic TensorFlow z = w*x + b
 import tensorflow as tf
 
